@@ -1,5 +1,16 @@
 #include "Figura.h"
 
+Figura::Figura()
+{
+	m_tipus = NO_FIGURA;
+	m_color = NO_COLOR;
+	m_nCostats = 0;
+
+	for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
+			m_matriu[i][j] = false;
+}
+
 Figura::Figura(TipusFigura tipus, ColorFigura color)
 {
 	int nCostats = -1;
@@ -26,20 +37,35 @@ Figura::Figura(TipusFigura tipus, ColorFigura color)
 	m_color = color;
 
 	for (int i = 0; i < 4; i++)
-	{
 		for (int j = 0; j < 4; j++)
-		{
 			m_matriu[i][j] = false;
-		}
-	}
 
 	inicialitzarMatriu();
 }
 
-bool Figura::transposarMatriuFigura()
+void Figura::transposarMatriuFigura()
 {
-	// To do
-	return true;
+	bool matriuAux[4][4];
+	for (int i = 0; i < m_nCostats; i++)
+		for (int j = 0; j < m_nCostats; j++)
+			matriuAux[i][j] = m_matriu[j][i];
+
+	for (int i = 0; i < m_nCostats; i++)
+		for (int j = 0; j < m_nCostats; j++)
+			m_matriu[i][j] = matriuAux[i][j];
+}
+
+void Figura::invertir(const bool& columnes, const bool& files)
+{
+	bool matriuAux[4][4];
+	if (columnes)
+		for (int i = 0; i < m_nCostats; i++)
+			for (int j = 0; j < m_nCostats; j++)
+				matriuAux[i][j] = m_matriu[i][m_nCostats - 1 - j];
+	else if (files)
+		for (int i = 0; i < m_nCostats; i++)
+			for (int j = 0; j < m_nCostats; j++)
+				matriuAux[i][j] = m_matriu[m_nCostats - 1 - i][j];
 }
 
 void Figura::inicialitzarMatriu()

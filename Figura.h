@@ -31,15 +31,17 @@ typedef enum { GIR_HORARI = 0, GIR_ANTI_HORARI } DireccioGir;
 class Figura
 {
 public:
-	Figura() : m_tipus(NO_FIGURA), m_color(NO_COLOR), m_nCostats(0) {}
+	Figura();
 	Figura(TipusFigura tipus, ColorFigura color);
 
 	TipusFigura getTipus() const { return m_tipus; }
 	ColorFigura getColor() const { return m_color; }
 	int getNCostats() const { return m_nCostats; }
+	bool getMatriu(const int &i, const int &j) const { return m_matriu[i][j]; }
+	int getPosicio(const int &i) const { return m_posicio[i]; }
 
-	bool transposarMatriuFigura();
-	bool invertir(const bool &columnes, const bool &files);
+	void transposarMatriuFigura();
+	void invertir(const bool &columnes, const bool &files);
 private:
 	void inicialitzarMatriu();
 	TipusFigura m_tipus;
@@ -49,5 +51,6 @@ private:
 	// matriuFigura es un punter a una matriu de booleans que representa la figura.
 	// La dimensió de la matriu depen del tipus de figura.
 	bool m_matriu[4][4];
+	int m_posicio[2];
 };
 
