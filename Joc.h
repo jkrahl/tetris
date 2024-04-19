@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "Tauler.h"
-using namespace std;
 
 /*
 ▪ Ha de servir per poder gestionar el funcionament global del joc.
