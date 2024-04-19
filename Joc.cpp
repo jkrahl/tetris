@@ -81,12 +81,32 @@ bool Joc::giraFigura(DireccioGir direccio)
 bool Joc::mouFigura(int dirX)
 {
     bool si_mou = true;
-    return false;
+
+    m_figura_actual.setX(m_figura_actual.getX() + dirX);   
+    
+    for (int i = 0; i < m_figura_actual.getNCostats(); i++)
+    {
+        for (int j = 0; j < m_figura_actual.getNCostats(); j++)
+        {
+            if ((m_figura_actual.getPixel(i, j) != COLOR_NEGRE &&
+                m_tauler.getPixel(i + m_figura.getX(), j + m_figura.getY())) || m_figura_actual.getX() + j < 0 ||
+                m_figura_actual.getX() +j > MAX_FILES)
+            {
+                m_figura_actual.setX(m_figura_actual.getX() - dirX);
+                return false;
+            }
+        }
+    }
+
+    return si_mou;
 }
 
 int Joc::baixaFigura()
 {
-    // To do
+    m_figura_actual.setY(m_figura_actual.getY()+1);
+
+
+
     return 0;
 }
 
