@@ -1,16 +1,5 @@
 #include "Figura.h"
 
-Figura::Figura()
-{
-	m_tipus = NO_FIGURA;
-	m_color = NO_COLOR;
-	m_nCostats = 0;
-
-	for (int i = 0; i < 4; i++)
-		for (int j = 0; j < 4; j++)
-			m_matriu[i][j] = false;
-}
-
 Figura::Figura(TipusFigura tipus, ColorFigura color)
 {
 	int nCostats = -1;
@@ -43,15 +32,24 @@ Figura::Figura(TipusFigura tipus, ColorFigura color)
 	inicialitzarMatriu();
 }
 
+void Figura::girar(const DireccioGir& direccio)
+{
+	transposarMatriuFigura();
+	if (direccio == GIR_HORARI)
+		invertir(true, false);
+	else
+		invertir(false, true);
+}
+
 void Figura::transposarMatriuFigura()
 {
-	bool matriuAux[4][4];
-	for (int i = 0; i < m_nCostats; i++)
-		for (int j = 0; j < m_nCostats; j++)
+	ColorFigura matriuAux[4][4];
+	for (int i = 0; i < N_FILES_MAX; i++)
+		for (int j = 0; j < N_COLUMNES_MAX; j++)
 			matriuAux[i][j] = m_matriu[j][i];
 
-	for (int i = 0; i < m_nCostats; i++)
-		for (int j = 0; j < m_nCostats; j++)
+	for (int i = 0; i < N_FILES_MAX; i++)
+		for (int j = 0; j < N_COLUMNES_MAX; j++)
 			m_matriu[i][j] = matriuAux[i][j];
 }
 
@@ -70,48 +68,53 @@ void Figura::invertir(const bool& columnes, const bool& files)
 
 void Figura::inicialitzarMatriu()
 {
+	if (m_tipus == NO_FIGURA)
+		return;
+
 	switch (m_tipus)
 	{
 	case FIGURA_I:
-		m_matriu[1][0] = true;
-		m_matriu[1][1] = true;
-		m_matriu[1][2] = true;
-		m_matriu[1][3] = true;
+		m_matriu[1][0] = COLOR_BLAUCEL;
+		m_matriu[1][1] = COLOR_BLAUCEL;
+		m_matriu[1][2] = COLOR_BLAUCEL;
+		m_matriu[1][3] = COLOR_BLAUCEL;
 		break;
 	case FIGURA_J:
-		m_matriu[0][0] = true;
-		m_matriu[1][0] = true;
-		m_matriu[1][1] = true;
-		m_matriu[1][2] = true;
+		m_matriu[0][0] = COLOR_BLAUFOSC;
+		m_matriu[1][0] = COLOR_BLAUFOSC;
+		m_matriu[1][1] = COLOR_BLAUFOSC;
+		m_matriu[1][2] = COLOR_BLAUFOSC;
 		break;
 	case FIGURA_L:
-		m_matriu[0][2] = true;
-		m_matriu[1][0] = true;
-		m_matriu[1][1] = true;
-		m_matriu[1][2] = true;
+		m_matriu[0][2] = COLOR_TARONJA;
+		m_matriu[1][0] = COLOR_TARONJA;
+		m_matriu[1][1] = COLOR_TARONJA;
+		m_matriu[1][2] = COLOR_TARONJA;
 		break;
 	case FIGURA_O:
-		m_matriu[0][0] = true;
-		m_matriu[0][1] = true;
-		m_matriu[1][0] = true;
-		m_matriu[1][1] = true;
+		m_matriu[0][0] = COLOR_GROC;
+		m_matriu[0][1] = COLOR_GROC;
+		m_matriu[1][0] = COLOR_GROC;
+		m_matriu[1][1] = COLOR_GROC;
 		break;
 	case FIGURA_S:
-		m_matriu[0][1] = true;
-		m_matriu[0][2] = true;
-		m_matriu[1][0] = true;
-		m_matriu[1][1] = true;
+		m_matriu[0][1] = COLOR_VERD;
+		m_matriu[0][2] = COLOR_VERD;
+		m_matriu[1][0] = COLOR_VERD;
+		m_matriu[1][1] = COLOR_VERD;
 		break;
 	case FIGURA_T:
-		m_matriu[0][1] = true;
-		m_matriu[1][0] = true;
-		m_matriu[1][1] = true;
-		m_matriu[1][2] = true;
+		m_matriu[0][1] = COLOR_MAGENTA;
+		m_matriu[1][0] = COLOR_MAGENTA;
+		m_matriu[1][1] = COLOR_MAGENTA;
+		m_matriu[1][2] = COLOR_MAGENTA;
+		break;
 	case FIGURA_Z:
-		m_matriu[0][0] = true;
-		m_matriu[0][1] = true;
-		m_matriu[1][1] = true;
-		m_matriu[1][2] = true;
+		m_matriu[0][0] = COLOR_VERMELL;
+		m_matriu[0][1] = COLOR_VERMELL;
+		m_matriu[1][1] = COLOR_VERMELL;
+		m_matriu[1][2] = COLOR_VERMELL;
+		break;
 	default:
 		break;
 	}

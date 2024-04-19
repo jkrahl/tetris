@@ -33,50 +33,12 @@ void Joc::inicialitza(const string& nomFitxer)
     fitxer.close();
 }
 
-
 bool Joc::giraFigura(DireccioGir direccio)
 {
-    bool si_girar = true;
-
-    if (m_figura_actual.getTipus() != FIGURA_O)
-    {
-        if (direccio == GIR_HORARI) //
-        {
-            m_figura_actual.transposarMatriuFigura();
-            m_figura_actual.invertir(true, false);
-        }
-        else
-        {
-            m_figura_actual.transposarMatriuFigura();
-            m_figura_actual.invertir(false, true);
-        }
-
-        for (int i = 0; i < m_figura_actual.getNCostats(); i++)
-        {
-            for (int j = 0; j < m_figura_actual.getNCostats(); j++)
-            {
-                if (m_figura_actual.getPixel(i, j) != COLOR_NEGRE &&
-                    m_tauler.getPixel(i + m_figura.getX(), j + m_figura.getY()))
-                {
-                    if (direccio == GIR_HORARI)
-                    {
-                        m_figura_actual.transposarMatriuFigura();
-                        m_figura_actual.invertir(false, true);
-                    }
-                    else
-                    {
-                        m_figura_actual.transposarMatriuFigura();
-                        m_figura_actual.invertir(true, false);
-                    }
-                    return false;
-                }
-            }
-        }
-    }
-    return si_girar;
+    Figura aux = m_figura_actual;
+    aux.girar(direccio);
+    m_tauler.ComprovarColisions(aux);
 }
-
-
 
 bool Joc::mouFigura(int dirX)
 {
