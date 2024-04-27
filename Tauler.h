@@ -12,9 +12,9 @@ typedef enum {
 class Tauler
 {
 public:
-	Tauler();
+	//Tauler();
 	bool HiHaColisions(const Figura& figura);
-	void FixarFigura(const Figura& figura);
+	//void FixarFigura(const Figura& figura);
 private:
 	ColorFigura m_tauler[N_FILES][N_COLUMNES];
 };

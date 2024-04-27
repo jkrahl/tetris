@@ -7,83 +7,41 @@ const int MAX_COLUMNES = 8;
 
 void Joc::inicialitza(const string& nomFitxer)
 {
-    ifstream fitxer;
-    fitxer.open(nomFitxer);
-
-    int tipus = 0, x = 0, y = 0, gir = 0;
-
-    if (fitxer.is_open())
-    {
-        fitxer >> tipus >> x >> y >> gir;
-        m_figura_actual.setTipus(static_cast<TipusFigura>(tipus));
-        m_figura_actual.setPosicio(x, y);
-        m_figura_actual.setGir(static_cast<DireccioGir>(gir));
-
-        for (int i = 0; i < MAX_FILES; i++)
-        {
-            for (int j = 0; j < MAX_COLUMNES; j++)
-            {
-                int pixel;
-                fitxer >> pixel;
-                m_tauler.setPixel(i, j, pixel);
-            }
-        }
-    }
-
-    fitxer.close();
+    return;
 }
 
 bool Joc::giraFigura(DireccioGir direccio)
 {
     Figura aux = m_figura_actual;
     aux.girar(direccio);
-    m_tauler.ComprovarColisions(aux);
+    if (m_tauler.HiHaColisions(aux))
+		return false;
+
+    m_figura_actual.girar(direccio);
+	return true;
 }
 
 bool Joc::mouFigura(int dirX)
 {
-    bool si_mou = true;
+	Figura aux = m_figura_actual;
+	Posicio pos = aux.getPosicioUpperLeft();
+	pos.x += dirX;
+	aux.setPosicio(pos);
+	if (m_tauler.HiHaColisions(aux))
+		return false;
 
-    m_figura_actual.setX(m_figura_actual.getX() + dirX);   
-    
-    for (int i = 0; i < m_figura_actual.getNCostats(); i++)
-    {
-        for (int j = 0; j < m_figura_actual.getNCostats(); j++)
-        {
-            if ((m_figura_actual.getPixel(i, j) != COLOR_NEGRE &&
-                m_tauler.getPixel(i + m_figura.getX(), j + m_figura.getY())) || m_figura_actual.getX() + j < 0 ||
-                m_figura_actual.getX() +j > MAX_FILES)
-            {
-                m_figura_actual.setX(m_figura_actual.getX() - dirX);
-                return false;
-            }
-        }
-    }
-
-    return si_mou;
+	m_figura_actual.setPosicio(pos);
+	return true;
 }
 
 int Joc::baixaFigura()
 {
-    m_figura_actual.setY(m_figura_actual.getY()+1);
-
-
-
-    return 0;
+	// Falta implementar
+	return 0;
 }
 
 void Joc::escriuTauler(const string& nomFitxer)
 {
-    ofstream fitxer;
-    fitxer.open(nomFitxer);
-
-    for (int i = 0; i < MAX_FILES; i++)
-    {
-        for (int j = 0; j < MAX_COLUMNES; j++)
-        {
-            fitxer << m_tauler.getPixel(i, j);
-        }
-    }
-
-    fitxer.close();
+	// Falta implementar
+    return;
 }

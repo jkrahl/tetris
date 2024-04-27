@@ -1,35 +1,18 @@
-#include "Figura.h"
+﻿#include "Figura.h"
 
-Figura::Figura(TipusFigura tipus, ColorFigura color)
+ostream& operator<<(ostream& os, Figura& f)
 {
-	int nCostats = -1;
-	switch (tipus)
+	for (int i = 0; i < f.getNCostats(); i++)
 	{
-	case FIGURA_J:
-	case FIGURA_L:
-	case FIGURA_T:
-	case FIGURA_S:
-	case FIGURA_Z:
-		nCostats = 3;
-		break;
-	case FIGURA_I:
-		nCostats = 4;
-		break;
-	case FIGURA_O:
-		nCostats = 2;
-		break;
-	default:
-		break;
+		for (int j = 0; j < f.getNCostats(); j++)
+		{
+			if (f.getMatriu()[i][j] == NO_COLOR)
+				os << " ";
+			else
+				os << "█";
+		}
 	}
-
-	m_nCostats = nCostats;
-	m_color = color;
-
-	for (int i = 0; i < 4; i++)
-		for (int j = 0; j < 4; j++)
-			m_matriu[i][j] = false;
-
-	inicialitzarMatriu();
+	return os;
 }
 
 void Figura::girar(const DireccioGir& direccio)
@@ -68,8 +51,13 @@ void Figura::invertir(const bool& columnes, const bool& files)
 
 void Figura::inicialitzarMatriu()
 {
+	if (m_matriu != nullptr)
+		return;
+
 	if (m_tipus == NO_FIGURA)
 		return;
+
+	m_matriu = creaMatriu(m_nCostats, m_nCostats);
 
 	switch (m_tipus)
 	{
@@ -118,4 +106,42 @@ void Figura::inicialitzarMatriu()
 	default:
 		break;
 	}
+}
+
+ColorFigura** Figura::creaMatriu(int nFiles, int nColumnes)
+{
+	ColorFigura** matriu = new ColorFigura*[nFiles];
+	for (int i = 0; i < nFiles; i++)
+		matriu[i] = new ColorFigura[nColumnes];
+
+	for (int i = 0; i < nFiles; i++)
+		for (int j = 0; j < nColumnes; j++)
+			matriu[i][j] = NO_COLOR;
+
+	return matriu;
+}
+
+int nCostatsSegonsTipus(const TipusFigura& tipus)
+{
+	int nCostats = -1;
+	switch (tipus)
+	{
+	case FIGURA_J:
+	case FIGURA_L:
+	case FIGURA_T:
+	case FIGURA_S:
+	case FIGURA_Z:
+		nCostats = 3;
+		break;
+	case FIGURA_I:
+		nCostats = 4;
+		break;
+	case FIGURA_O:
+		nCostats = 2;
+		break;
+	default:
+		break;
+	}
+	
+	return nCostats;
 }
