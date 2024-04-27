@@ -35,5 +35,7 @@ int main()
 		default:
 			break;
 		}
+
+		cout << f;
 	} while (a != 0);
 }

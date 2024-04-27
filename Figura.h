@@ -29,32 +29,32 @@ typedef enum {
 	FIGURA_S
 } TipusFigura;
 
-typedef struct 
+typedef struct
 {
 	int x;
 	int y;
 } Posicio;
 
-int nCostatsSegonsTipus(const TipusFigura &tipus);
+int nCostatsSegonsTipus(const TipusFigura& tipus);
 
 typedef enum { GIR_HORARI = 0, GIR_ANTI_HORARI } DireccioGir;
 
 class Figura
 {
 public:
-	Figura() : m_tipus(NO_FIGURA), m_nCostats(0) ,m_posicio({ 0,0 }), m_matriu(nullptr) {  }
-	Figura(TipusFigura tipus) : m_tipus(tipus), m_nCostats(nCostatsSegonsTipus(tipus)), m_posicio({0,0}) { inicialitzarMatriu(); }
-
+	Figura() : m_tipus(NO_FIGURA), m_nCostats(0), m_posicio({ 0,0 }), m_matriu(nullptr) {  }
+	Figura(TipusFigura tipus) : m_tipus(tipus), m_nCostats(nCostatsSegonsTipus(tipus)), m_posicio({ 0,0 }) { inicialitzarMatriu(); }
+	~Figura();
 	ColorFigura** getMatriu() const { return m_matriu; }
 	Posicio getPosicioUpperLeft() const { return m_posicio; }
 	int getNCostats() const { return m_nCostats; }
 
-	void setPosicio(const Posicio &posicio) { m_posicio = posicio; }
-	void girar(const DireccioGir &direccio);
+	void setPosicio(const Posicio& posicio) { m_posicio = posicio; }
+	void girar(const DireccioGir& direccio);
 
 private:
 	void transposarMatriuFigura();
-	void invertir(const bool &columnes, const bool &files);
+	void invertir(const bool& columnes, const bool& files);
 	void inicialitzarMatriu();
 	ColorFigura** creaMatriu(int nFiles, int nColumnes);
 	const TipusFigura m_tipus;
@@ -64,5 +64,5 @@ private:
 	Posicio m_posicio;
 };
 
-	ostream& operator<<(ostream& os, Figura& f);
+ostream& operator<<(ostream& os, Figura& f);
 

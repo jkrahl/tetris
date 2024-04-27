@@ -7,17 +7,18 @@ const int MAX_COLUMNES = 8;
 
 void Joc::inicialitza(const string& nomFitxer)
 {
-    return;
+	// Falta implementar
+	return;
 }
 
 bool Joc::giraFigura(DireccioGir direccio)
 {
-    Figura aux = m_figura_actual;
-    aux.girar(direccio);
-    if (m_tauler.HiHaColisions(aux))
+	Figura aux = m_figura_actual;
+	aux.girar(direccio);
+	if (m_tauler.HiHaColisions(aux))
 		return false;
 
-    m_figura_actual.girar(direccio);
+	m_figura_actual.girar(direccio);
 	return true;
 }
 
@@ -43,5 +44,5 @@ int Joc::baixaFigura()
 void Joc::escriuTauler(const string& nomFitxer)
 {
 	// Falta implementar
-    return;
+	return;
 }

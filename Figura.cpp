@@ -9,10 +9,22 @@ ostream& operator<<(ostream& os, Figura& f)
 			if (f.getMatriu()[i][j] == NO_COLOR)
 				os << " ";
 			else
-				os << "█";
+				os << "X";
 		}
+		os << endl;
 	}
+	os << endl;
 	return os;
+}
+
+Figura::~Figura()
+{
+	if (m_matriu != nullptr)
+	{
+		for (int i = 0; i < m_nCostats; i++)
+			delete[] m_matriu[i];
+		delete[] m_matriu;
+	}
 }
 
 void Figura::girar(const DireccioGir& direccio)
@@ -26,27 +38,32 @@ void Figura::girar(const DireccioGir& direccio)
 
 void Figura::transposarMatriuFigura()
 {
-	ColorFigura matriuAux[4][4];
-	for (int i = 0; i < N_FILES_MAX; i++)
-		for (int j = 0; j < N_COLUMNES_MAX; j++)
+	ColorFigura matriuAux[N_FILES_MAX][N_COLUMNES_MAX];
+	for (int i = 0; i < m_nCostats; i++)
+		for (int j = 0; j < m_nCostats; j++)
 			matriuAux[i][j] = m_matriu[j][i];
 
-	for (int i = 0; i < N_FILES_MAX; i++)
-		for (int j = 0; j < N_COLUMNES_MAX; j++)
+	for (int i = 0; i < m_nCostats; i++)
+		for (int j = 0; j < m_nCostats; j++)
 			m_matriu[i][j] = matriuAux[i][j];
 }
 
 void Figura::invertir(const bool& columnes, const bool& files)
 {
-	bool matriuAux[4][4];
+	ColorFigura matriuAux[N_FILES_MAX][N_COLUMNES_MAX];
 	if (columnes)
 		for (int i = 0; i < m_nCostats; i++)
 			for (int j = 0; j < m_nCostats; j++)
 				matriuAux[i][j] = m_matriu[i][m_nCostats - 1 - j];
+
 	else if (files)
 		for (int i = 0; i < m_nCostats; i++)
 			for (int j = 0; j < m_nCostats; j++)
 				matriuAux[i][j] = m_matriu[m_nCostats - 1 - i][j];
+
+	for (int i = 0; i < m_nCostats; i++)
+		for (int j = 0; j < m_nCostats; j++)
+			m_matriu[i][j] = matriuAux[i][j];
 }
 
 void Figura::inicialitzarMatriu()
@@ -110,7 +127,7 @@ void Figura::inicialitzarMatriu()
 
 ColorFigura** Figura::creaMatriu(int nFiles, int nColumnes)
 {
-	ColorFigura** matriu = new ColorFigura*[nFiles];
+	ColorFigura** matriu = new ColorFigura * [nFiles];
 	for (int i = 0; i < nFiles; i++)
 		matriu[i] = new ColorFigura[nColumnes];
 
@@ -142,6 +159,6 @@ int nCostatsSegonsTipus(const TipusFigura& tipus)
 	default:
 		break;
 	}
-	
+
 	return nCostats;
 }
