@@ -48,7 +48,7 @@ public:
 	ColorFigura** getMatriu() const { return m_matriu; }
 	Posicio getPosicioUpperLeft() const { return m_posicio; }
 	int getNCostats() const { return m_nCostats; }
-
+	
 	void setPosicio(const Posicio& posicio) { m_posicio = posicio; }
 	void girar(const DireccioGir& direccio);
 

@@ -162,3 +162,5 @@ int nCostatsSegonsTipus(const TipusFigura& tipus)
 
 	return nCostats;
 }
+
+
