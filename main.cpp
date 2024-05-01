@@ -16,7 +16,7 @@ int main()
 	cout << "Introdueix tipus:" << endl;
 	cin >> tipus;
 
-	Figura f = Figura((TipusFigura)tipus);
+	Figura f = Figura((TipusFigura)tipus, { 0,0 });
 
 	cout << f;
 

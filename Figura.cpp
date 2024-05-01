@@ -1,13 +1,13 @@
 ﻿#include "Figura.h"
 
-ostream& operator<<(ostream& os, Figura& f)
+ostream& operator<<(ostream& os, const Figura& f)
 {
 	for (int i = 0; i < f.getNCostats(); i++)
 	{
 		for (int j = 0; j < f.getNCostats(); j++)
 		{
 			if (f.getMatriu()[i][j] == NO_COLOR)
-				os << " ";
+				os << "O";
 			else
 				os << "X";
 		}
@@ -34,6 +34,31 @@ void Figura::girar(const DireccioGir& direccio)
 		invertir(true, false);
 	else
 		invertir(false, true);
+}
+
+Figura& Figura::operator=(const Figura& f)
+{
+	if (this != &f)
+	{
+		m_tipus = f.m_tipus;
+		m_nCostats = f.m_nCostats;
+		m_posicio = f.m_posicio;
+		if (m_matriu != nullptr)
+		{
+			for (int i = 0; i < m_nCostats; i++)
+				delete[] m_matriu[i];
+			delete[] m_matriu;
+		}
+		if (f.getMatriu() != nullptr)
+		{
+			inicialitzarMatriu();
+			for (int i = 0; i < m_nCostats; i++)
+				for (int j = 0; j < m_nCostats; j++)
+					m_matriu[i][j] = f.m_matriu[i][j];
+		}
+		else m_matriu = nullptr;
+	}
+	return *this;
 }
 
 void Figura::transposarMatriuFigura()

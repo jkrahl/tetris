@@ -7,26 +7,37 @@ const int MAX_COLUMNES = 8;
 
 void Joc::inicialitza(const string& nomFitxer)
 {
-	ifstream input;
+	ifstream f;
+	f.open(nomFitxer);
 
-	input.open(nomFitxer);
-	int x = 0, y = 0, 
-	Tipus tipus = 0, 
-	DireccioGir girar = 0;
-	bool siGirar = false;
-	if (input.is_open())
+	if (f.is_open())
 	{
-		input >> tipus >> x >> y >> gir;
-		m_figura_actual = Figura(tipus);
-		Posicio	p_posicio(x, y);
-		girar = gir;
-		m_figura_actual.setPosicio(p_posicio);
-		siGirar = m_figura_actual.girar(girar);
-	}
-	
-	input.close();
+		// Leer figura actual
+		int tipus, x, y, nGirs;
+		f >> tipus >> x >> y >> nGirs;
+		if (tipus == FIGURA_I)
+			x += 2;
+		else
+			x += 1;
 
-	
+		m_figura_actual = Figura((TipusFigura)tipus, { x + 1, y });
+
+		for (int i = 0; i < nGirs; i++)
+			m_figura_actual.girar(GIR_HORARI);
+
+		// Leer tauler
+		for (int i = 0; i < N_FILES; i++)
+		{
+			for (int j = 0; j < N_COLUMNES; j++)
+			{
+				int color;
+				f >> color;
+				m_tauler.setCasella(i, j, (ColorFigura)color);
+			}
+		}
+
+		f.close();
+	}
 }
 
 bool Joc::giraFigura(DireccioGir direccio)
@@ -53,54 +64,26 @@ bool Joc::mouFigura(int dirX)
 	return true;
 }
 
+// Retorna el nombre de files completades
 int Joc::baixaFigura()
 {
-	int nFilCompl = 0;
+	Figura aux = m_figura_actual;
+	Posicio pos = aux.getPosicioUpperLeft();
+	pos.y++;
+	aux.setPosicio(pos);
 
-	if (!m_tauler.HiHaColisions(m_figura_actual)) //CAso en que no hubiera colisiones
+	if (!m_tauler.HiHaColisions(aux))
 	{
-		Posicio pos = m_figura_actual.getPosicioUpperLeft();
-		pos.y++;
 		m_figura_actual.setPosicio(pos);
+		return 0;
 	}
-	else
-	{
-		m_tauler.FixarFigura(m_figura_actual);
-		for (int i = 0; i < N_FILES; i++)
-		{
-			bool filCompl = true;
-			for (int j = 0; j < N_COLUMNES; j++)
-			{
-				if (m_tauler.getCasella(j, i) == NO_COLOR) //Si detecta alguna casilla sin color es que no es completa
-				{
-					filCompl = false;
-					filCompl = false;
-				}
-			}
-			if (filCompl)
-			{
-				for (int k = i; k > 0; k--) //Eliminar la fila que esta completa
-				{
-					for (int j = 0; j < N_COLUMNES; j++)
-					{
-						m_tauler.setCasella(j, k, m_tauler.getCasella(j, k - 1));
-					}
-				}
 
-				//DEspues de eliminar la fila completada hay que asignarle el color NO_COLOR
-				for (int j = 0; j < N_COLUMNES; j++)
-				{
-					m_tauler.setCasella(j, 0, NO_COLOR);
-				}
-				nFilCompl++;
+	m_tauler.FixarFigura(m_figura_actual);
 
-				m_figura_actual = Figura();
-			}
-		
+	int nFilCompl = m_tauler.eliminaFilesCompl();
+
 	return nFilCompl;
 }
-
-
 
 void Joc::escriuTauler(const string& nomFitxer)
 {
@@ -113,11 +96,11 @@ void Joc::escriuTauler(const string& nomFitxer)
 		for (int i = 0; i < N_FILES; i++)
 		{
 			for (int j = 0; j < N_COLUMNES; j++)
-			{
-				fitxer << m_tauler.getCasella(i, j);  //Muestra la letra de cada casilla
-			}
+				fitxer << m_tauler.getCasella(i, j);
 
-			fitxer << endl; //Para que se vea como una matriz. Cada 8 posiciones = endl
+			fitxer << endl;
 		}
+
+		fitxer.close();
 	}
 }
