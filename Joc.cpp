@@ -20,7 +20,7 @@ void Joc::inicialitza(const string& nomFitxer)
 		else
 			x += 1;
 
-		m_figura_actual = Figura((TipusFigura)tipus, { x + 1, y });
+		m_figura_actual = Figura((TipusFigura)tipus, { x, y });
 
 		for (int i = 0; i < nGirs; i++)
 			m_figura_actual.girar(GIR_HORARI);
@@ -42,7 +42,7 @@ void Joc::inicialitza(const string& nomFitxer)
 
 bool Joc::giraFigura(DireccioGir direccio)
 {
-	Figura aux = m_figura_actual;
+	Figura aux(m_figura_actual);
 	aux.girar(direccio);
 	if (m_tauler.HiHaColisions(aux))
 		return false;
@@ -53,7 +53,7 @@ bool Joc::giraFigura(DireccioGir direccio)
 
 bool Joc::mouFigura(int dirX)
 {
-	Figura aux = m_figura_actual;
+	Figura aux(m_figura_actual);
 	Posicio pos = aux.getPosicioUpperLeft();
 	pos.x += dirX;
 	aux.setPosicio(pos);
@@ -67,7 +67,7 @@ bool Joc::mouFigura(int dirX)
 // Retorna el nombre de files completades
 int Joc::baixaFigura()
 {
-	Figura aux = m_figura_actual;
+	Figura aux(m_figura_actual);
 	Posicio pos = aux.getPosicioUpperLeft();
 	pos.y++;
 	aux.setPosicio(pos);
@@ -89,6 +89,10 @@ void Joc::escriuTauler(const string& nomFitxer)
 {
 	ofstream fitxer;
 
+	Tauler taulerAmbFigura = m_tauler;
+
+	taulerAmbFigura.FixarFigura(m_figura_actual);
+
 	fitxer.open(nomFitxer);
 
 	if (fitxer.is_open())
@@ -96,7 +100,7 @@ void Joc::escriuTauler(const string& nomFitxer)
 		for (int i = 0; i < N_FILES; i++)
 		{
 			for (int j = 0; j < N_COLUMNES; j++)
-				fitxer << m_tauler.getCasella(i, j);
+				fitxer << taulerAmbFigura.getCasella(i, j);
 
 			fitxer << endl;
 		}

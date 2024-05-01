@@ -52,7 +52,9 @@ public:
 	{
 		inicialitzarMatriu();
 	}
+	Figura(const Figura& other);
 	~Figura();
+	void allibera();
 
 	ColorFigura** getMatriu() const { return m_matriu; }
 	Posicio getPosicioUpperLeft() const { return m_posicio; }

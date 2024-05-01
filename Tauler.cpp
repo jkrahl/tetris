@@ -61,6 +61,17 @@ int Tauler::eliminaFilesCompl()
 	return nFilCompl;
 }
 
+Tauler& Tauler::operator=(const Tauler& tauler)
+{
+	if (this != &tauler)
+	{
+		for (int i = 0; i < N_FILES; i++)
+			for (int j = 0; j < N_COLUMNES; j++)
+				m_tauler[i][j] = tauler.m_tauler[i][j];
+	}
+	return *this;
+}
+
 void Tauler::inicialitzarMatrix()
 {
 	for (int i = 0; i < N_FILES; i++)

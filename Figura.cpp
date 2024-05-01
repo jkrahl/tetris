@@ -17,7 +17,28 @@ ostream& operator<<(ostream& os, const Figura& f)
 	return os;
 }
 
+Figura::Figura(const Figura& other)
+{
+	m_tipus = other.m_tipus;
+	m_nCostats = other.m_nCostats;
+	m_posicio = other.m_posicio;
+	allibera();
+	if (other.getMatriu() != nullptr)
+	{
+		inicialitzarMatriu();
+		for (int i = 0; i < m_nCostats; i++)
+			for (int j = 0; j < m_nCostats; j++)
+				m_matriu[i][j] = other.getMatriu()[i][j];
+	}
+	else m_matriu = nullptr;
+}
+
 Figura::~Figura()
+{
+	allibera();
+}
+
+void Figura::allibera()
 {
 	if (m_matriu != nullptr)
 	{
@@ -25,6 +46,7 @@ Figura::~Figura()
 			delete[] m_matriu[i];
 		delete[] m_matriu;
 	}
+	m_matriu = nullptr;
 }
 
 void Figura::girar(const DireccioGir& direccio)
@@ -36,25 +58,20 @@ void Figura::girar(const DireccioGir& direccio)
 		invertir(false, true);
 }
 
-Figura& Figura::operator=(const Figura& f)
+Figura& Figura::operator=(const Figura& other)
 {
-	if (this != &f)
+	if (this != &other)
 	{
-		m_tipus = f.m_tipus;
-		m_nCostats = f.m_nCostats;
-		m_posicio = f.m_posicio;
-		if (m_matriu != nullptr)
-		{
-			for (int i = 0; i < m_nCostats; i++)
-				delete[] m_matriu[i];
-			delete[] m_matriu;
-		}
-		if (f.getMatriu() != nullptr)
+		allibera();
+		m_tipus = other.m_tipus;
+		m_nCostats = other.m_nCostats;
+		m_posicio = other.m_posicio;
+		if (other.getMatriu() != nullptr)
 		{
 			inicialitzarMatriu();
 			for (int i = 0; i < m_nCostats; i++)
 				for (int j = 0; j < m_nCostats; j++)
-					m_matriu[i][j] = f.m_matriu[i][j];
+					m_matriu[i][j] = other.getMatriu()[i][j];
 		}
 		else m_matriu = nullptr;
 	}

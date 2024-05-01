@@ -23,6 +23,8 @@ public:
 	bool HiHaColisions(const Figura& figura);
 	void FixarFigura(const Figura& figura);
 	int eliminaFilesCompl();
+
+	Tauler& operator=(const Tauler& tauler);
 private:
 	void inicialitzarMatrix();
 	ColorFigura m_tauler[N_FILES][N_COLUMNES];
