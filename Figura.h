@@ -63,7 +63,7 @@ public:
 	void setPosicio(const Posicio& posicio) { m_posicio = posicio; }
 	void girar(const DireccioGir& direccio);
 
-	Figura& operator=(const Figura& other);
+	Figura operator=(const Figura& other);
 
 private:
 	void transposarMatriuFigura();

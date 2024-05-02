@@ -18,11 +18,11 @@ ostream& operator<<(ostream& os, const Figura& f)
 }
 
 Figura::Figura(const Figura& other)
+	:m_matriu(nullptr)
 {
 	m_tipus = other.m_tipus;
 	m_nCostats = other.m_nCostats;
 	m_posicio = other.m_posicio;
-	allibera();
 	if (other.getMatriu() != nullptr)
 	{
 		inicialitzarMatriu();
@@ -58,7 +58,7 @@ void Figura::girar(const DireccioGir& direccio)
 		invertir(false, true);
 }
 
-Figura& Figura::operator=(const Figura& other)
+Figura Figura::operator=(const Figura& other)
 {
 	if (this != &other)
 	{

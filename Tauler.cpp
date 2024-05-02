@@ -28,8 +28,16 @@ void Tauler::FixarFigura(const Figura& figura)
 
 	for (int i = 0; i < figura.getNCostats(); i++)
 		for (int j = 0; j < figura.getNCostats(); j++)
-			if (figura.getMatriu()[i][j] != NO_COLOR) 
-				m_tauler[i + x][j + y] = figura.getMatriu()[i][j]; 
+		{
+			if (figura.getMatriu()[i][j] != NO_COLOR)
+			{
+				if (x + i < MAX_COL && j + y < MAX_FILA &&
+					x + i >= 0 && j + y >= 0)
+				{
+					m_tauler[i + x][j + y] = figura.getMatriu()[i][j];
+				}
+			}
+		}
 }
 
 int Tauler::eliminaFilesCompl()
