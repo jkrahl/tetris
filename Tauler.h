@@ -17,9 +17,9 @@ class Tauler
 public:
 	Tauler() { inicialitzarMatrix(); }
 
-	ColorFigura getCasella(int x, int y) const { return m_tauler[y][x]; }
+	ColorFigura getCasella(int x, int y) const { return m_tauler[x][y]; }
 
-	void setCasella(int x, int y, ColorFigura color) { m_tauler[y][x] = color; }
+	void setCasella(int x, int y, ColorFigura color) { m_tauler[x][y] = color; }
 	bool HiHaColisions(const Figura& figura);
 	void FixarFigura(const Figura& figura);
 	int eliminaFilesCompl();

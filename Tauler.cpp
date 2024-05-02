@@ -11,8 +11,8 @@ bool Tauler::HiHaColisions(const Figura& figura)
 
 	for (int i = 0; i < figura.getNCostats(); i++)
 		for (int j = 0; j < figura.getNCostats(); j++)
-			if (figura.getMatriu()[i][j] != NO_COLOR
-				&& m_tauler[y + i][x + j] != NO_COLOR)
+			if (figura.getMatriu()[i][j] != COLOR_NEGRE
+				&& m_tauler[y + i][x + j] != COLOR_NEGRE)
 				return true;
 
 }
@@ -49,7 +49,7 @@ int Tauler::eliminaFilesCompl()
 		bool filCompl = true;
 		for (int j = 0; j < N_COLUMNES; j++)
 		{
-			if (m_tauler[j][i] == NO_COLOR) //Si detecta alguna casilla sin color es que no es completa
+			if (m_tauler[j][i] == COLOR_NEGRE) //Si detecta alguna casilla sin color es que no es completa
 			{
 				filCompl = false;
 				break;

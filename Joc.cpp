@@ -16,10 +16,11 @@ void Joc::inicialitza(const string& nomFitxer)
 		int tipus, x, y, nGirs;
 		f >> tipus >> x >> y >> nGirs;
 		if (tipus == FIGURA_I)
-			x += 2;
+			x -= 2;
 		else
-			x += 1;
+			x -= 1;
 
+		y -= 1;
 		m_figura_actual = Figura((TipusFigura)tipus, { x, y });
 
 		for (int i = 0; i < nGirs; i++)
