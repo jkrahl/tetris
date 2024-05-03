@@ -175,7 +175,7 @@ ColorFigura** Figura::creaMatriu(int nFiles, int nColumnes)
 
 	for (int i = 0; i < nFiles; i++)
 		for (int j = 0; j < nColumnes; j++)
-			matriu[i][j] = NO_COLOR;
+		    matriu[i][j] = COLOR_NEGRE; // REVIEW: Usa color negro en vez de no color.
 
 	return matriu;
 }

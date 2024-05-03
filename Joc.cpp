@@ -13,13 +13,15 @@ void Joc::inicialitza(const string& nomFitxer)
 	if (f.is_open())
 	{
 		// Leer figura actual
-		int tipus, x, y, nGirs;
-		f >> tipus >> x >> y >> nGirs;
-		if (tipus == FIGURA_I)
-			x -= 2;
-		else
-			x -= 1;
+		int tipus, y, x, nGirs;
+		// REVIEW: Se lee fila,columna no x,y
+		f >> tipus >> y >> x >> nGirs;
+		//		if (tipus == FIGURA_I) // REVIEW: No hace falta
+		//			x -= 2;
+		//		else
+		//			x -= 1;
 
+		x -= 1;
 		y -= 1;
 		m_figura_actual = Figura((TipusFigura)tipus, { x, y });
 
@@ -82,6 +84,7 @@ int Joc::baixaFigura()
 	m_tauler.FixarFigura(m_figura_actual);
 
 	int nFilCompl = m_tauler.eliminaFilesCompl();
+	m_figura_actual = Figura();
 
 	return nFilCompl;
 }
