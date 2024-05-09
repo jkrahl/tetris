@@ -29,7 +29,7 @@ bool Tauler::HiHaColisions(const Figura& figura)
 		    }
 		}
 	}
-
+	return false;
 }
 
 void Tauler::FixarFigura(const Figura& figura)
