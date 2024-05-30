@@ -113,6 +113,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;libpng16.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -158,9 +160,12 @@
     <ClCompile Include="..\..\0. C++ Code\Graphic Lib\sprites.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Graphic Lib\stb_vorbis.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Graphic Lib\video.cpp" />
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Figura.cpp" />
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Joc.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Partida.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\GraphicManager.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\main.cpp" />
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Tauler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\debug.h" />
@@ -177,9 +182,12 @@
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\sprites.h" />
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\stb_vorbis.h" />
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\video.h" />
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Figura.h" />
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Joc.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Partida.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\InfoJoc.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\GraphicManager.h" />
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Tauler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
