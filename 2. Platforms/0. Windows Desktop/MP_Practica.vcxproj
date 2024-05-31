@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -74,7 +74,7 @@
     <OutDir>$(SolutionDir)\Program\</OutDir>
     <IncludePath>$(SolutionDir)\extlibs\SDL\include;$(SolutionDir)\extlibs\libpng;$(SolutionDir)\extlibs\SDL_ttf\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\extlibs;$(LibraryPath)</LibraryPath>
-    <IntDir>$(ProjectDir)\..\..\1. Resources\</IntDir>
+    <IntDir>$(ProjectDir)..\..\1. Resources\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\Program\</OutDir>
@@ -160,12 +160,14 @@
     <ClCompile Include="..\..\0. C++ Code\Graphic Lib\sprites.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Graphic Lib\stb_vorbis.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Graphic Lib\video.cpp" />
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\ColaMoviments.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Figura.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Joc.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Partida.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\GraphicManager.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\main.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Tauler.cpp" />
+    <ClCompile Include="ColaFigura.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\debug.h" />
@@ -182,12 +184,14 @@
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\sprites.h" />
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\stb_vorbis.h" />
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\video.h" />
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\ColaMoviments.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Figura.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Joc.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Partida.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\InfoJoc.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\GraphicManager.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Tauler.h" />
+    <ClInclude Include="ColaFigura.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
