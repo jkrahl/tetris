@@ -160,6 +160,7 @@
     <ClCompile Include="..\..\0. C++ Code\Graphic Lib\sprites.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Graphic Lib\stb_vorbis.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Graphic Lib\video.cpp" />
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\ColaFigura.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\ColaMoviments.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Figura.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Joc.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="..\..\0. C++ Code\Logic Game\GraphicManager.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\main.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Tauler.cpp" />
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\Tetris.cpp" />
     <ClCompile Include="ColaFigura.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +186,7 @@
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\sprites.h" />
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\stb_vorbis.h" />
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\video.h" />
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\ColaFigura.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\ColaMoviments.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Figura.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Joc.h" />
@@ -191,6 +194,7 @@
     <ClInclude Include="..\..\0. C++ Code\Logic Game\InfoJoc.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\GraphicManager.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Tauler.h" />
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\Tetris.h" />
     <ClInclude Include="ColaFigura.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
