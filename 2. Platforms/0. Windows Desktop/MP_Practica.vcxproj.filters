@@ -49,10 +49,10 @@
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Tauler.cpp">
       <Filter>Logic Game\Source files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\0. C++ Code\Logic Game\ColaMoviments.cpp">
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\ColaFigura.cpp">
       <Filter>Logic Game\Source files</Filter>
     </ClCompile>
-    <ClCompile Include="ColaFigura.cpp">
+    <ClCompile Include="..\..\0. C++ Code\Logic Game\ColaMoviments.cpp">
       <Filter>Logic Game\Source files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,10 +117,10 @@
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Tauler.h">
       <Filter>Logic Game\Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\0. C++ Code\Logic Game\ColaMoviments.h">
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\ColaFigura.h">
       <Filter>Logic Game\Header files</Filter>
     </ClInclude>
-    <ClInclude Include="ColaFigura.h">
+    <ClInclude Include="..\..\0. C++ Code\Logic Game\ColaMoviments.h">
       <Filter>Logic Game\Header files</Filter>
     </ClInclude>
   </ItemGroup>
