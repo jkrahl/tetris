@@ -16,12 +16,15 @@ struct Puntos
 class Tetris
 {
 public:
-	Partida getPartida() { return m_partida; }
 	void mostraPuntuacio()const;
 	void jugaPartida(Screen& pantalla);
-	void guardaPuntuacion(const string& jugador, int puntos);
 
 private:
+	void insertaPuntuacionOrdenada(const string& jugador, int puntos);
+	void guardaPuntuacion(const string& nomFitxer) const;
+	void leerPuntuacion(const string& nomFitxer);
+
+
 	Partida m_partida;
 	std::list<Puntos> m_puntuaciones;
 };

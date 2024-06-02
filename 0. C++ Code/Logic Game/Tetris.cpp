@@ -17,6 +17,8 @@ void Tetris::jugaPartida(Screen& pantalla)
 
         cin >> opcio;
 
+        leerPuntuacion("puntuacion.txt");
+
         switch (opcio)
         {
         case 1:
@@ -26,7 +28,8 @@ void Tetris::jugaPartida(Screen& pantalla)
             string jugador;
             cout << "Escriba su nombre: ";
             cin >> jugador;
-            guardaPuntuacion(jugador, puntos);
+            insertaPuntuacionOrdenada(jugador, puntos);
+            guardaPuntuacion("puntuacion.txt");
             break;
         }
         case 2:
@@ -37,7 +40,9 @@ void Tetris::jugaPartida(Screen& pantalla)
             cout << "Escriba su nombre: ";
 
             cin >> jugador;
-            guardaPuntuacion(jugador, puntos);
+            insertaPuntuacionOrdenada(jugador, puntos);
+            guardaPuntuacion("puntuacion.txt");
+
             break;
         }
         case 3:
@@ -65,7 +70,7 @@ void Tetris::mostraPuntuacio() const
 
 }
 
-void Tetris::guardaPuntuacion(const string& jugador, int puntos)
+void Tetris::insertaPuntuacionOrdenada(const string& jugador, int puntos)
 {
     //inserta de forma ordenada en una lista , mayor a menor
     list<Puntos>::iterator iter = m_puntuaciones.begin();
@@ -89,4 +94,41 @@ void Tetris::guardaPuntuacion(const string& jugador, int puntos)
     nuevoPunto.puntos = puntos;
     m_puntuaciones.insert(iter, nuevoPunto);
     
+}
+
+void Tetris::guardaPuntuacion(const string& nomFitxer) const
+{
+    ofstream output;
+    output.open(nomFitxer);
+    list<Puntos>::const_iterator iter = m_puntuaciones.begin();
+    while (iter != m_puntuaciones.end())
+    {
+        output << iter->jugador << " " << iter->puntos << endl;
+        iter++;
+    }
+}
+
+void Tetris::leerPuntuacion(const string& nomFitxer)
+{
+
+    ifstream input;
+    input.open(nomFitxer);
+
+    if (input.is_open())
+    {
+        string jugador;
+        int puntos;
+        Puntos puntoNuevo;
+        input >> puntoNuevo.jugador >> puntoNuevo.puntos;
+        
+
+        while (!input.eof())
+        {
+            m_puntuaciones.push_back(puntoNuevo);
+            input >> puntoNuevo.jugador >> puntoNuevo.puntos;
+
+        }
+
+        input.close();
+    }
 }
