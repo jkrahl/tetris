@@ -5,6 +5,7 @@
 
 void Tetris::jugaPartida(Screen& pantalla)
 {
+    leerPuntuacion("puntuacion.txt"); //Se pone fuera del do..while para qque solo lea una vez
     int opcio;
     do
     {
@@ -16,9 +17,7 @@ void Tetris::jugaPartida(Screen& pantalla)
         cout << "--------------------------------------" << endl;
 
         cin >> opcio;
-
-        leerPuntuacion("puntuacion.txt");
-
+        
         switch (opcio)
         {
         case 1:
@@ -29,7 +28,6 @@ void Tetris::jugaPartida(Screen& pantalla)
             cout << "Escriba su nombre: ";
             cin >> jugador;
             insertaPuntuacionOrdenada(jugador, puntos);
-            guardaPuntuacion("puntuacion.txt");
             break;
         }
         case 2:
@@ -41,7 +39,6 @@ void Tetris::jugaPartida(Screen& pantalla)
 
             cin >> jugador;
             insertaPuntuacionOrdenada(jugador, puntos);
-            guardaPuntuacion("puntuacion.txt");
 
             break;
         }
@@ -55,6 +52,8 @@ void Tetris::jugaPartida(Screen& pantalla)
             break;
         }
     } while (opcio != 4);   
+
+    guardaPuntuacion("puntuacion.txt"); //Al final para que se guarde una vez
 }
 
 void Tetris::mostraPuntuacio() const 
@@ -82,8 +81,8 @@ void Tetris::insertaPuntuacionOrdenada(const string& jugador, int puntos)
         if (iter->puntos < puntos)
         {
             trobat = true;
-        }
-        else
+        } 
+        else 
         {
             iter++;
         }
@@ -111,7 +110,7 @@ void Tetris::guardaPuntuacion(const string& nomFitxer) const
 void Tetris::leerPuntuacion(const string& nomFitxer)
 {
 
-    ifstream input;
+    ifstream input; 
     input.open(nomFitxer);
 
     if (input.is_open())
