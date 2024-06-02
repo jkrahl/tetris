@@ -49,9 +49,6 @@
     <ClCompile Include="..\..\0. C++ Code\Logic Game\ColaMoviments.cpp">
       <Filter>Logic Game\Source files</Filter>
     </ClCompile>
-    <ClCompile Include="ColaFigura.cpp">
-      <Filter>Logic Game\Source files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Tetris.cpp">
       <Filter>Logic Game\Source files</Filter>
     </ClCompile>
@@ -121,9 +118,6 @@
       <Filter>Logic Game\Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\0. C++ Code\Logic Game\ColaMoviments.h">
-      <Filter>Logic Game\Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="ColaFigura.h">
       <Filter>Logic Game\Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Tetris.h">

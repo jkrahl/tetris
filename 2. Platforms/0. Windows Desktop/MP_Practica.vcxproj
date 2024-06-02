@@ -169,7 +169,6 @@
     <ClCompile Include="..\..\0. C++ Code\Logic Game\main.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Tauler.cpp" />
     <ClCompile Include="..\..\0. C++ Code\Logic Game\Tetris.cpp" />
-    <ClCompile Include="ColaFigura.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\0. C++ Code\Graphic Lib\debug.h" />
@@ -195,7 +194,6 @@
     <ClInclude Include="..\..\0. C++ Code\Logic Game\GraphicManager.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Tauler.h" />
     <ClInclude Include="..\..\0. C++ Code\Logic Game\Tetris.h" />
-    <ClInclude Include="ColaFigura.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
