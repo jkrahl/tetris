@@ -55,6 +55,5 @@ private:
 	Posicio m_posicio;
 };
 
-
-
+istream& operator>>(istream& in, Figura& f); 
 ostream& operator<<(ostream& os, const Figura& f);

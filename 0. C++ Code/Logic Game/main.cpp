@@ -1,7 +1,7 @@
 //
 //  main.cpp
 //
-//  Copyright � 2018 Compiled Creations Limited. All rights reserved.
+//  Copyright � 2018 Compiled Creations Limited. All rights reserved. hjkhkj
 //
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined  (_WIN64)
@@ -10,6 +10,7 @@
 //Definicio necesaria per poder incloure la llibreria i que trobi el main
 #define SDL_MAIN_HANDLED
 #include <windows.h>
+#include "Tetris.h"
 //Llibreria grafica
 #include "../Graphic Lib/libreria.h"
 #include "../Graphic Lib/NFont/NFont.h"
@@ -38,35 +39,17 @@ int main(int argc, const char* argv[])
 
     //Inicialitza un objecte de la classe Screen que s'utilitza per gestionar la finestra grafica
     Screen pantalla(SCREEN_SIZE_X, SCREEN_SIZE_Y);
+    Sound_Init();
+    const char* song  = "data/output.ogg";
+    char* songNoConst = const_cast<char*>(song);
+    T_SOUND* music = Sound_LoadMusic(songNoConst, 1);
+
     //Mostrem la finestra grafica
     pantalla.show();
 
-    Partida game;
-    game.inicialitza(0, "data/Games/partida.txt", " asd ", "asljkd");
-
-    Uint64 NOW = SDL_GetPerformanceCounter();
-    Uint64 LAST = 0;
-    double deltaTime = 0;
-    do
-    {
-        LAST = NOW;
-        NOW = SDL_GetPerformanceCounter();
-        deltaTime = (double)((NOW - LAST) / (double)SDL_GetPerformanceFrequency());
-
-
-        // Captura tots els events de ratolí i teclat de l'ultim cicle
-        pantalla.processEvents();
-
-        game.actualitza(deltaTime);
-
-        // Actualitza la pantalla
-        pantalla.update();
-
-    } while (!Keyboard_GetKeyTrg(KEYBOARD_ESCAPE));
-    // Sortim del bucle si pressionem ESC
-
-    //Instruccio necesaria per alliberar els recursos de la llibreria 
-    SDL_Quit();
+    Tetris tetris;
+    tetris.jugaPartida(pantalla);
+    
     return 0;
 }
 

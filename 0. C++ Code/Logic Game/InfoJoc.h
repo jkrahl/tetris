@@ -1,18 +1,33 @@
 #ifndef INFO_JOC_H
 #define INFO_JOC_H
 
+const float VELOCITAT = 0.7;
+const int PUNTUACIO_PER_NIVELL = 1000;
+const int PUNTUACIO_PER_FILA = 100;
+const int PUNTUACIO_PER_CAIGUDA = 10;
+const int PUNTS_EXTRA = 25;
 typedef enum
 {
     TECLA_ESQUERRA,
     TECLA_DRETA,
-    TECLA_AMUNT,
-    TECLA_ABAIX,
-    TECLA_ESPAI,
+    TECLA_AMUNT,    
+    TECLA_ABAIX, 
+    TECLA_ESPAI, 
     TECLA_ESCAPE,
     NO_TECLA
 } TipusTecla;
 
 const int N_TIPUS_FIGURES = 7;
+
+typedef enum
+{
+    MOVIMENT_ESQUERRA = 0,
+    MOVIMENT_DRETA,
+    MOVIMENT_GIR_HORARI,
+    MOVIMENT_GIR_ANTI_HORARI,
+    MOVIMENT_BAIXA,
+    MOVIMENT_BAIXA_FINAL,
+} TipusMoviment;
 
 typedef enum
 {

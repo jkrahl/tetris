@@ -5,9 +5,10 @@
 
 const int MAX_FILES = N_FILES_TAULER;
 const int MAX_COLUMNES = N_COL_TAULER;
-
+	
 void Joc::inicialitza(const string& nomFitxer)
 {
+	*this = Joc();
 	ifstream f;
 	f.open(nomFitxer);
 
@@ -16,19 +17,7 @@ void Joc::inicialitza(const string& nomFitxer)
 		// Leer figura actual
 		int tipus, y, x, nGirs;
 		// REVIEW: Se lee fila,columna no x,y
-		f >> tipus >> y >> x >> nGirs;
-		//		if (tipus == FIGURA_I) // REVIEW: No hace falta
-		//			x -= 2;
-		//		else
-		//			x -= 1;
-
-		x -= 1;
-		y -= 1;
-		m_figura_actual = Figura((TipusFigura)tipus, { x, y });
-
-		for (int i = 0; i < nGirs; i++)
-			m_figura_actual.girar(GIR_HORARI);
-
+		f >> m_figura_actual;
 		// Leer tauler
 		for (int i = 0; i < N_FILES_TAULER; i++)
 		{
@@ -76,28 +65,30 @@ int Joc::baixaFigura()
 	pos.y++;
 	aux.setPosicio(pos);
 
+	int nFilesCompl;
 	if (!m_tauler.HiHaColisions(aux))
 	{
 		m_figura_actual.setPosicio(pos);
-		return 0;
+		nFilesCompl = -1;
 	}
+	else
+	{
+		m_tauler.FixarFigura(m_figura_actual);
+		nFilesCompl = m_tauler.eliminaFilesCompl();
+		m_figura_actual = Figura();
 
-	m_tauler.FixarFigura(m_figura_actual);
-
-	int nFilCompl = m_tauler.eliminaFilesCompl();
-	m_figura_actual = Figura();
-
-	return nFilCompl;
+	}
+	return nFilesCompl;
 }
 
 int Joc::baixaTotalmentFigura()
 {
-	int res = 0;
-	while (res != -1)
+	int res;
+	do 
 	{
 		res = baixaFigura();
-	}
-	return res;
+	} while (res == -1);
+	return res; //DEvuelve la cantidad de filas completas
 }
 
 void Joc::escriuTauler(const string& nomFitxer)
@@ -158,18 +149,43 @@ void Joc::draw() const
 
 
 }
-
-void Joc:: creaNovaFigura()
+/*
+Devuelve un bool indicando si se ha podido colocar o no la figura.
+*/
+bool Joc::creaNovaFigura()
 {
-	m_figura_actual.allibera();
 	Posicio pos;
-	pos.x = std::rand() % N_COL_TAULER;
+	pos.x = 5;
 	pos.y = 0;
 	TipusFigura tipus = (TipusFigura)(std::rand() % (N_TIPUS_FIGURES - 1) + 1);
-	m_figura_actual = Figura(tipus, pos);
+	Figura novaFigura(tipus, pos);
+	
+	if (m_tauler.HiHaColisions(novaFigura))
+	{
+		return false;
+	}
+	else
+	{
+		m_figura_actual = novaFigura;
+		return true;
+	}
 }
-#include "GraphicManager.h"
-void Joc::actualitza(double deltaTime)
+
+
+bool Joc::setNovaFigura(Figura& fig)
 {
+	Posicio pos;
+	pos.x = 5;
+	pos.y = 0;
+	fig.setPosicio(pos);
+	if (m_tauler.HiHaColisions(fig))
+	{
+		return false;
+	}
+	else
+	{
+		m_figura_actual = fig;
+		return true;
+	}
 
 }

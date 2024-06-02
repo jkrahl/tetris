@@ -17,6 +17,25 @@ ostream& operator<<(ostream& os, const Figura& f)
 	return os;
 }
 
+istream& operator>>(istream& in, Figura& f)
+{
+	int tipus = 4444;
+	int y, x, nGirs;
+	in >> tipus >> y >> x >> nGirs;
+	x -= 1;
+	y -= 1;
+	if (tipus != 4444)
+	{
+		f = Figura((TipusFigura)tipus, { x, y });
+
+		for (int i = 0; i < nGirs; i++)
+			f.girar(GIR_HORARI);
+	}
+	
+
+	return in;
+}
+
 Figura::Figura(const Figura& other)
 	:m_matriu(nullptr)
 {

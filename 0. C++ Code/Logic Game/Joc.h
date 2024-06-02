@@ -9,8 +9,10 @@
 class Joc
 {
 public:
+	Joc(){}
 	int baixaTotalmentFigura(); //PAra baja la figura de golpe si se presiona space
-	void creaNovaFigura(); //Crear figura nueva
+	bool creaNovaFigura(); //Crear figura nueva
+	bool setNovaFigura(Figura& fig);
 
 	void actualitza(double deltaTime);
 

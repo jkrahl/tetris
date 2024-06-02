@@ -5,7 +5,7 @@ bool Tauler::HiHaColisions(const Figura& figura)
 {
 	if (figura.getMatriu() == nullptr)
 		return false;
-
+	
 	int x = figura.getPosicioUpperLeft().x;
 	int y = figura.getPosicioUpperLeft().y;
 
@@ -57,7 +57,7 @@ void Tauler::FixarFigura(const Figura& figura)
 
 int Tauler::eliminaFilesCompl()
 {
-	int nFilCompl = -1;
+	int nFilCompl = 0;
 
 	for (int i = 0; i < N_FILES_TAULER; i++)
 	{
