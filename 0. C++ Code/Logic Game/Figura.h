@@ -32,8 +32,15 @@ public:
 	}
 	Figura(const Figura& other);
 	~Figura();
+	void dibuixaBordes() const;									
 	void allibera();
 
+	void dibuixa() const;
+
+	bool esBuida() const
+	{
+		return m_tipus == NO_FIGURA;
+	}
 	ColorFigura** getMatriu() const { return m_matriu; }
 	Posicio getPosicioUpperLeft() const { return m_posicio; }
 	int getNCostats() const { return m_nCostats; }

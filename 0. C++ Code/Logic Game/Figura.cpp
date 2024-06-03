@@ -1,4 +1,5 @@
 ﻿#include "Figura.h"
+#include "GraphicManager.h"
 
 ostream& operator<<(ostream& os, const Figura& f)
 {
@@ -67,6 +68,42 @@ void Figura::allibera()
 	}
 	m_matriu = nullptr;
 }
+
+void Figura::dibuixa() const
+{
+	for (size_t i = 0; i < getNCostats(); i++)
+	{
+		for (size_t j = 0; j < getNCostats(); j++)
+		{
+			ColorFigura color = getMatriu()[i][j];
+			if (color != COLOR_NEGRE)
+			{
+				auto pos = getPosicioUpperLeft();
+				GraphicManager::getInstance()->drawSprite((IMAGE_NAME)(color + 1),
+					POS_X_TAULER + ((j + pos.x + 1) * MIDA_QUADRAT), 
+					POS_Y_TAULER + ((i + pos.y) * MIDA_QUADRAT), false);
+			}
+		}
+	}
+}
+
+void Figura::dibuixaBordes() const
+{
+	for (size_t i = 0; i < getNCostats(); i++)
+	{
+		for (size_t j = 0; j < getNCostats(); j++)
+		{
+			ColorFigura color = getMatriu()[i][j];
+			if (color != COLOR_NEGRE)
+			{
+				auto pos = getPosicioUpperLeft();
+				GraphicManager::getInstance()->drawBorder((IMAGE_NAME)(color + 1),
+					POS_X_TAULER + ((j + pos.x + 1) * MIDA_QUADRAT), POS_Y_TAULER + ((i + pos.y) * MIDA_QUADRAT), false);
+			}
+		}
+	}
+}
+
 
 void Figura::girar(const DireccioGir& direccio)
 {

@@ -40,7 +40,7 @@ int main(int argc, const char* argv[])
     //Inicialitza un objecte de la classe Screen que s'utilitza per gestionar la finestra grafica
     Screen pantalla(SCREEN_SIZE_X, SCREEN_SIZE_Y);
     Sound_Init();
-    const char* song  = "data/output.ogg";
+    const char* song  = "data/output.ogg"; //Musica de fondo
     char* songNoConst = const_cast<char*>(song);
     T_SOUND* music = Sound_LoadMusic(songNoConst, 1);
 

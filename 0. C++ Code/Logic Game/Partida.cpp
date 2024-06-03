@@ -23,6 +23,7 @@ int Partida::partidaBucle(Screen& pantalla)
     } while (!Keyboard_GetKeyTrg(KEYBOARD_ESCAPE) && !getIsGameOver());
 
     return m_puntuacio;
+
 }
 void Partida::inicialitza(int mode, const string& fitxerInicial, const string& fitxerFigures,
     const string& fitxerMoviments)
@@ -132,6 +133,7 @@ void Partida::actualitzaModoTest(double deltaTime)
                 if (m_colaFigura.esBuida())
                 {
                     m_gameOver = true;
+
                 }
                 else
                 { 

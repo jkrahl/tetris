@@ -119,33 +119,26 @@ void Joc::escriuTauler(const string& nomFitxer)
 
 void Joc::draw() const
 {
-	for (size_t i = 0; i < N_FILES_TAULER; i++)
-	{
-		for (size_t j = 0; j < N_COL_TAULER; j++)
-		{
-			ColorFigura color = m_tauler.getCasella(i, j);
-			if (color != COLOR_NEGRE && color != NO_COLOR)
-			{
-				GraphicManager::getInstance()->drawSprite((IMAGE_NAME)(color + 1),
-					POS_X_TAULER + ((j + 1) * MIDA_QUADRAT), POS_Y_TAULER + ((i)*MIDA_QUADRAT), false);
-			}
-		}
-	}
+
+	m_tauler.dibuixa();
+
+	Figura ombra = m_figura_actual;
 	
-	
-	for (size_t i = 0; i < m_figura_actual.getNCostats(); i++)
+	if (!ombra.esBuida())
 	{
-		for (size_t j = 0; j < m_figura_actual.getNCostats(); j++)
+		while (!m_tauler.HiHaColisions(ombra))
 		{
-			ColorFigura color = m_figura_actual.getMatriu()[i][j];
-			if (color != COLOR_NEGRE)
-			{
-				auto pos = m_figura_actual.getPosicioUpperLeft();
-				GraphicManager::getInstance()->drawSprite((IMAGE_NAME)(color + 1),
-					POS_X_TAULER + ((j + pos.x + 1) * MIDA_QUADRAT), POS_Y_TAULER + ((i + pos.y)*MIDA_QUADRAT), false);
-			}
+			Posicio pos = ombra.getPosicioUpperLeft();
+			pos.y++;
+			ombra.setPosicio(pos);
 		}
+		Posicio pos = ombra.getPosicioUpperLeft();
+		pos.y--;
+		ombra.setPosicio(pos);
+		ombra.dibuixaBordes();
 	}
+
+	m_figura_actual.dibuixa();
 
 
 }

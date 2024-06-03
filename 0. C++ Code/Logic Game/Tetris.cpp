@@ -1,8 +1,6 @@
 #include "Tetris.h"
 #include "GraphicManager.h"
 
-
-
 void Tetris::jugaPartida(Screen& pantalla)
 {
     leerPuntuacion("puntuacion.txt"); //Se pone fuera del do..while para qque solo lea una vez
@@ -28,6 +26,8 @@ void Tetris::jugaPartida(Screen& pantalla)
             cout << "Escriba su nombre: ";
             cin >> jugador;
             insertaPuntuacionOrdenada(jugador, puntos);
+
+
             break;
         }
         case 2:
@@ -65,7 +65,6 @@ void Tetris::mostraPuntuacio() const
         cout << "Jugador: " << iter->jugador << "     Puntuacion: " << iter->puntos << endl;
         iter++;
     }
-
 
 }
 
@@ -109,7 +108,6 @@ void Tetris::guardaPuntuacion(const string& nomFitxer) const
 
 void Tetris::leerPuntuacion(const string& nomFitxer)
 {
-
     ifstream input; 
     input.open(nomFitxer);
 

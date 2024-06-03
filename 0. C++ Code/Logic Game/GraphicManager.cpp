@@ -41,6 +41,25 @@ void GraphicManager::drawSprite (IMAGE_NAME name, float posX, float posY, bool c
     
 }
 
+void GraphicManager::drawBorder(IMAGE_NAME name, float posX, float posY, bool centered)
+{
+    if (name >= 0 && name < GRAFIC_NUM_MAX)
+    {
+        if (centered)
+        {
+            posX -= m_aSprites[name].getScaleX() / 2;
+            posY -= m_aSprites[name].getScaleY() / 2;
+        }
+        m_aSprites[name].drawBorder(posX, posY);
+    }
+    else
+    {
+        cout << "Error: no existeix el identificador de image";
+    }
+
+}
+
+
 NFont::Rectf GraphicManager::drawFont (FONT_NAME name,
                                        float posX, float posY,
                                        float size,

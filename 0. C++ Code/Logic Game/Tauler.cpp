@@ -1,7 +1,24 @@
 #include "Tauler.h"
+#include "GraphicManager.h"
+
+void Tauler::dibuixa() const
+{
+	for (size_t i = 0; i < N_FILES_TAULER; i++)
+	{
+		for (size_t j = 0; j < N_COL_TAULER; j++)
+		{
+			ColorFigura color = getCasella(i, j);
+			if (color != COLOR_NEGRE && color != NO_COLOR)
+			{
+				GraphicManager::getInstance()->drawSprite((IMAGE_NAME)(color + 1),
+					POS_X_TAULER + ((j + 1) * MIDA_QUADRAT), POS_Y_TAULER + ((i)*MIDA_QUADRAT), false);
+			}
+		}
+	}
+}
 
 // True si la figura colisiona. False si no colisiona.
-bool Tauler::HiHaColisions(const Figura& figura)
+bool Tauler::HiHaColisions(const Figura& figura) const
 {
 	if (figura.getMatriu() == nullptr)
 		return false;

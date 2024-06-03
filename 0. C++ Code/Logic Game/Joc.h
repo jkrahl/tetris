@@ -13,9 +13,10 @@ public:
 	int baixaTotalmentFigura(); //PAra baja la figura de golpe si se presiona space
 	bool creaNovaFigura(); //Crear figura nueva
 	bool setNovaFigura(Figura& fig);
-
 	void actualitza(double deltaTime);
+	void draw() const;
 
+	
 	/*
 	* Aquest mètode el farem servir només pel test automàtic del lliurament parcial.
 	* Servirà per inicialitzar la partida a partir de la informació que llegirem del fitxer que es passa com a paràmetre.
@@ -28,8 +29,6 @@ public:
 	* Retorna un booleà en funció de si el gir és vàlid segons la posició de la figura i el contingut del tauler.
 	*/
 	bool giraFigura(DireccioGir direccio);
-
-	void draw() const;
 
 	/*
 	* Desplaça la figura lateralment en la direcció indicada (+1 cap a la dreta, -1 cap a l’esquerra), només si el moviment és vàlid (la figura no col·lisiona ni amb els límits del tauler ni amb altres figures ja col·locades al tauler).

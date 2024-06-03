@@ -1,4 +1,0 @@
-SpongeBob.exe 90
-Everest 30
-Patrick 30
-SAns.exe 0

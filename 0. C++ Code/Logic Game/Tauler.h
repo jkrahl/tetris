@@ -19,10 +19,11 @@ public:
 	ColorFigura getCasella(int x, int y) const { return m_tauler[x][y]; }
 
 	void setCasella(int x, int y, ColorFigura color) { m_tauler[x][y] = color; }
-	bool HiHaColisions(const Figura& figura);
+	bool HiHaColisions(const Figura& figura) const;
 	void FixarFigura(const Figura& figura);
 	int eliminaFilesCompl();
-
+	void dibuixa() const;
+	
 	void printTauler()
 	{
 		for (size_t i = 0; i < N_FILES_TAULER; i++)
