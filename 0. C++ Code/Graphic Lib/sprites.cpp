@@ -37,7 +37,7 @@ Sprite::~Sprite()
 {
   if(animacion == NULL)
   {
-    // Si el sprite no tiene animación es que solo tiene su frame actual
+    // Si el sprite no tiene animación es que xºlo tiene su frame actual
     // Si el frame tiene un handle de textura pedimos al hardware que se olvide de la imagen y
     // libere la memoria y los handles que haya podido alojar
     if(frame_actual->texture) SDL_DestroyTexture(frame_actual->texture);
@@ -158,7 +158,7 @@ void Sprite::setScale(float scale)
 }
 
 // Dibuja un sprite en las coordenadas especificadas
-void Sprite::draw(int x, int y)
+void Sprite::drawBorder(int x, int y)
 {
   //Nos aseguramos de que el vídeo está en marcha
   assert(g_Video.renderer) ;
@@ -192,8 +192,57 @@ void Sprite::draw(int x, int y)
   dstrect.w = static_cast<int>(frame->tamx * scalex) ;
   dstrect.h = static_cast<int>(frame->tamy * scaley) ;
 
-  SDL_RenderCopy(g_Video.renderer, frame->texture, &srcrect, &dstrect) ;
+  SDL_RenderCopy(g_Video.renderer, frame->texture, &srcrect, &dstrect);
+
+  SDL_SetRenderDrawColor(g_Video.renderer,0,0,0,255);
+  dstrect.w -= 4;
+  dstrect.h -= 4;
+  dstrect.x += 2;
+  dstrect.y += 2;
+  SDL_RenderFillRect(g_Video.renderer, &dstrect);
 }
+
+// Dibuja un sprite en las coordenadas especificadas
+void Sprite::draw(int x, int y)
+{
+    //Nos aseguramos de que el vídeo está en marcha
+    assert(g_Video.renderer);
+    //Variable para que el cóigo quede más corto y legible
+    Frame* frame = frame_actual;
+    // Si el sprite no tiene un frame que dibujar nos marchamos
+    if (frame == NULL) return;
+    if (frame->surface == NULL) return;
+
+
+    // Nos aseguramos de que el sprite tiene textura
+    assert(frame->texture);
+
+    // La SDL necesita que le especifiquemos un par de rectángulos en su formato para poder dibujar
+    SDL_Rect srcrect;
+    SDL_Rect dstrect;
+
+    // Posición de la esquina superior izquierda
+    srcrect.x = 0;
+    srcrect.y = 0;
+
+    // Número de píxels a leer
+    srcrect.w = frame->tamx;
+    srcrect.h = frame->tamy;
+
+    // Posición de la esquina superior izquierda al dibujar
+    dstrect.x = x - static_cast<int>(frame->hx * scalex);
+    dstrect.y = y - static_cast<int>(frame->hy * scaley);
+
+    // Tamáño visible al dibujar
+    dstrect.w = static_cast<int>(frame->tamx * scalex);
+    dstrect.h = static_cast<int>(frame->tamy * scaley);
+
+    SDL_RenderCopy(g_Video.renderer, frame->texture, &srcrect, &dstrect);
+}
+
+
+
+
 
 // Crea un sprite, vacío si ruta == SPRITE_WILL_BE_ANIMATED, o con un frame conteniendo el .png
 // situado en la ruta

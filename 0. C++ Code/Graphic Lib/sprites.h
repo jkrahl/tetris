@@ -96,6 +96,7 @@ public:
   void create(const char* ruta);
   void setScale(float scale);
   void draw(int x, int y) ;
+  void drawBorder(int x, int y);
 
   int getScaleY() const;
   int getScaleX() const;
