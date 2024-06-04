@@ -97,8 +97,9 @@ void Figura::dibuixaBordes() const
 			if (color != COLOR_NEGRE)
 			{
 				auto pos = getPosicioUpperLeft();
-				GraphicManager::getInstance()->drawBorder((IMAGE_NAME)(color + 1),
-					POS_X_TAULER + ((j + pos.x + 1) * MIDA_QUADRAT), POS_Y_TAULER + ((i + pos.y) * MIDA_QUADRAT), false);
+				GraphicManager::getInstance()->drawSprite((GRAFIC_QUADRAT_GRIS),
+					POS_X_TAULER + ((j + pos.x + 1) * MIDA_QUADRAT),
+					POS_Y_TAULER + ((i + pos.y) * MIDA_QUADRAT), false);
 			}
 		}
 	}

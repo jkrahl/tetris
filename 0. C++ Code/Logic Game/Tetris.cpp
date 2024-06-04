@@ -61,7 +61,7 @@ void Tetris::mostraPuntuacio() const
     int i = 0;
     while (iter != m_puntuaciones.end() && i <= 10) //Mostrar solo 10 puntos
     {
-        cout << i+1 <<  "-   Jugador: " << iter->jugador << "     Puntuacion: " << iter->puntos << endl;
+        cout << i+1 <<  "- Jugador: " << iter->jugador << "     Puntuacion: " << iter->puntos << endl;
         iter++;
         i++;
     }

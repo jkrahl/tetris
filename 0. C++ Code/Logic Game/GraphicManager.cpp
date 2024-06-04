@@ -110,6 +110,8 @@ string GraphicManager::getImagePath(IMAGE_NAME name){
     case GRAFIC_QUADRAT_VERMELL:
         path = "data/Graphics/quadrat_vermell.png";
         break;
+    case GRAFIC_QUADRAT_GRIS:
+        path = "data/Graphics/quadrat_gris.png";
     case GRAFIC_QUADRAT_VERD:
         path = "data/Graphics/quadrat_verd.png";
         break;
