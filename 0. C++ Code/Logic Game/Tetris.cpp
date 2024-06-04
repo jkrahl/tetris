@@ -31,7 +31,15 @@ void Tetris::jugaPartida(Screen& pantalla)
         }
         case 2: //Modo test
         {
-            m_partida.inicialitza(true, "data/Games/partida.txt", "data/Games/figures.txt", "data/Games/moviments.txt"); //Modo test, le paso los ficheros
+            string partida, figures, moviments;
+            cout << "Nom del fitxer amb l'estat inicial del tauler: ";
+            cin >> partida;
+            cout << "Nom del fitxer amb la sequencia de figures: ";
+            cin >> figures;
+            cout << "Nom del fitxer amb la sequencia de moviments: ";
+            cin >> moviments;
+
+            m_partida.inicialitza(true, partida, figures, moviments); //Modo test, le paso los ficheros
             int puntos = m_partida.partidaBucle(pantalla);
             string jugador;
             cout << "Escriba su nombre: ";
