@@ -32,24 +32,18 @@ public:
 	}
 	Figura(const Figura& other);
 	~Figura();
-	void dibuixaBordes() const;									
-	void allibera();
-
 	void dibuixa() const;
-
-	bool esBuida() const
-	{
-		return m_tipus == NO_FIGURA;
-	}
+	bool esBuida() const { return m_tipus == NO_FIGURA;}
 	ColorFigura** getMatriu() const { return m_matriu; }
 	Posicio getPosicioUpperLeft() const { return m_posicio; }
 	int getNCostats() const { return m_nCostats; }
 	void setPosicio(const Posicio& posicio) { m_posicio = posicio; }
+	void dibuixaFantasma() const;
 	void girar(const DireccioGir& direccio);
-
 	Figura operator=(const Figura& other);
 
 private:
+	void allibera();
 	void transposarMatriuFigura();
 	void invertir(const bool& columnes, const bool& files);
 	void inicialitzarMatriu();

@@ -53,11 +53,8 @@ void Partida::inicialitza(int mode, const string& fitxerInicial, const string& f
         if (input.is_open())
         {
             int moviment;
-            input >> moviment;
-            m_colaMoviment.afegeix((TipusMoviment)moviment);
-            while (!input.eof())
+            while (input >> moviment)
             {
-                input >> moviment;
                 m_colaMoviment.afegeix((TipusMoviment)moviment);
             }
             input.close();
@@ -106,10 +103,21 @@ void Partida::actualitzaModoTest(double deltaTime)
                 int nFilesCompletes = m_joc.baixaFigura();
                 if (nFilesCompletes != -1)
                 {
-                    if (!m_joc.creaNovaFigura())
+                   
+                    if (m_colaFigura.esBuida())
                     {
                         m_gameOver = true;
                     }
+                    else
+                    {
+                        Figura figura = m_colaFigura.getPrimer();
+                        m_colaFigura.treu();
+                        if (!m_joc.setNovaFigura(figura))
+                        {
+                            m_gameOver = true;
+                        }
+                    }
+
                     m_puntuacio += (nFilesCompletes * PUNTUACIO_PER_FILA);
                     if (nFilesCompletes > 1)
                     {
@@ -121,6 +129,7 @@ void Partida::actualitzaModoTest(double deltaTime)
             }
             case MOVIMENT_BAIXA_FINAL:
             {
+
                 int nFilesCompletes = m_joc.baixaTotalmentFigura();
 
                 m_puntuacio += (nFilesCompletes * PUNTUACIO_PER_FILA);
@@ -137,9 +146,10 @@ void Partida::actualitzaModoTest(double deltaTime)
                 }
                 else
                 { 
+       
                     Figura figura = m_colaFigura.getPrimer();
                     m_colaFigura.treu();
-                    if(!m_joc.setNovaFigura(figura))
+                    if (!m_joc.setNovaFigura(figura))
                     {
                         m_gameOver = true;
                     }
@@ -152,7 +162,7 @@ void Partida::actualitzaModoTest(double deltaTime)
     }
 }
 
-void Partida::actualitzaModoNormal(double deltaTime)
+void Partida::actualitzaModoNormal(double deltaTime) //Dependiendo de que tecla se mueve de una manera u otra
 {
     if (Keyboard_GetKeyTrg(KEYBOARD_RIGHT))
         m_joc.mouFigura(1);
@@ -168,10 +178,10 @@ void Partida::actualitzaModoNormal(double deltaTime)
 
     if (Keyboard_GetKeyTrg(KEYBOARD_SPACE))
     {
-        int nFilesCompletes = m_joc.baixaTotalmentFigura();
+        int nFilesCompletes = m_joc.baixaTotalmentFigura(); //Obtengo la cantidad de filass completas
 
-        m_puntuacio += (nFilesCompletes * PUNTUACIO_PER_FILA);
-        if (nFilesCompletes > 1)
+        m_puntuacio += (nFilesCompletes * PUNTUACIO_PER_FILA); 
+        if (nFilesCompletes > 1) //Si hace mas de una fila completa le sumo puntos extra
         {
             m_puntuacio += (nFilesCompletes * PUNTS_EXTRA);
         }

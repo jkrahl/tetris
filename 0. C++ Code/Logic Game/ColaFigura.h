@@ -7,7 +7,6 @@ class NodoFigura
 {
 public:
 	NodoFigura() :m_next(nullptr), m_valor() {}
-
 	NodoFigura(Figura valor);
 	NodoFigura* getNext() { return m_next; }
 	Figura& getValor() { return m_valor; }
@@ -24,21 +23,10 @@ public:
 	ColaFigura();
 	~ColaFigura();
 	void afegeix(Figura tipus);
-	bool esBuida() const
-	{
-		return m_primer == nullptr;
-	}
-
+	bool esBuida() const{ return m_primer == nullptr;}
 	void treu();
-
-	Figura& getPrimer() const
-	{
-		return m_primer->getValor();
-	}
-	Figura& getUltim() const
-	{
-		return m_ultim->getValor();
-	}
+	Figura& getPrimer() const { return m_primer->getValor();}
+	Figura& getUltim() const { return m_ultim->getValor();}
 
 private:
 	NodoFigura* m_primer;

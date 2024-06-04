@@ -43,6 +43,7 @@ int main(int argc, const char* argv[])
     const char* song  = "data/output.ogg"; //Musica de fondo
     char* songNoConst = const_cast<char*>(song);
     T_SOUND* music = Sound_LoadMusic(songNoConst, 1);
+    srand(SDL_GetTicks());
 
     //Mostrem la finestra grafica
     pantalla.show();

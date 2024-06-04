@@ -18,7 +18,7 @@ void Tetris::jugaPartida(Screen& pantalla)
         
         switch (opcio)
         {
-        case 1:
+        case 1: //MOdo normal
         {
             m_partida.inicialitza(false, "data/Games/partida.txt", "", ""); //Modo normal
             int puntos = m_partida.partidaBucle(pantalla);
@@ -29,7 +29,7 @@ void Tetris::jugaPartida(Screen& pantalla)
 
             break;
         }
-        case 2:
+        case 2: //Modo test
         {
             m_partida.inicialitza(true, "data/Games/partida.txt", "data/Games/figures.txt", "data/Games/moviments.txt"); //Modo test, le paso los ficheros
             int puntos = m_partida.partidaBucle(pantalla);
@@ -40,7 +40,7 @@ void Tetris::jugaPartida(Screen& pantalla)
             insertaPuntuacionOrdenada(jugador, puntos);
             break;
         }
-        case 3:
+        case 3: //Mostrar puntuaciones
         {
             mostraPuntuacio();
             break;
@@ -50,31 +50,31 @@ void Tetris::jugaPartida(Screen& pantalla)
             break;
         }
     } while (opcio != 4);   
-    guardaPuntuacion("puntuacion.txt"); //Al final para que se guarde una vez
+    guardaPuntuacion("puntuacion.txt"); //Al final para que se guarde una vez clice '4'
    
 }
-
-void Tetris::mostraPuntuacio() const 
+ 
+void Tetris::mostraPuntuacio() const //Si clica 3, se mostraran las puntuaciones con el nombre del jugador
 {
     list<Puntos>::const_iterator iter = m_puntuaciones.begin();
     cout << "------PUNTUACIONES------" << endl;
     int i = 0;
     while (iter != m_puntuaciones.end() && i <= 10) //Mostrar solo 10 puntos
     {
-        cout << i+1 <<  "- Jugador: " << iter->jugador << "     Puntuacion: " << iter->puntos << endl;
+        cout << i+1 <<  ".  " << iter->jugador << "   " << iter->puntos << endl;
         iter++;
         i++;
     }
 
 }
 
-void Tetris::insertaPuntuacionOrdenada(const string& jugador, int puntos)
+void Tetris::insertaPuntuacionOrdenada(const string& jugador, int puntos) //De mayor a menor
 {
     //inserta de forma ordenada en una lista , mayor a menor
     list<Puntos>::iterator iter = m_puntuaciones.begin();
     
     bool trobat = false;
-
+    //Usamos un while y va comparando para encontrar el mayor
     while (iter != m_puntuaciones.end() && !trobat)
     {
         if (iter->puntos < puntos)
@@ -87,14 +87,14 @@ void Tetris::insertaPuntuacionOrdenada(const string& jugador, int puntos)
         }
     }
 
-    Puntos nuevoPunto;
+    Puntos nuevoPunto; //Agrega el nuevo punto en la lista
     nuevoPunto.jugador = jugador;
     nuevoPunto.puntos = puntos;
     m_puntuaciones.insert(iter, nuevoPunto);
     
 }
 
-void Tetris::guardaPuntuacion(const string& nomFitxer) const
+void Tetris::guardaPuntuacion(const string& nomFitxer) const //Guarda los puntos de una nueva partida con el nombre del jugaador
 {
     ofstream output;
     output.open(nomFitxer);
@@ -106,7 +106,7 @@ void Tetris::guardaPuntuacion(const string& nomFitxer) const
     }
 }
 
-void Tetris::leerPuntuacion(const string& nomFitxer)
+void Tetris::leerPuntuacion(const string& nomFitxer) //pasa los datos que hay en el fichero a la lista
 {
     ifstream input; 
     input.open(nomFitxer);
@@ -117,8 +117,6 @@ void Tetris::leerPuntuacion(const string& nomFitxer)
         int puntos;
         Puntos puntoNuevo;
         input >> puntoNuevo.jugador >> puntoNuevo.puntos;
-        
-
         while (!input.eof())
         {
             m_puntuaciones.push_back(puntoNuevo);

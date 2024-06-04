@@ -23,7 +23,6 @@ private:
 	void insertaPuntuacionOrdenada(const string& jugador, int puntos);
 	void guardaPuntuacion(const string& nomFitxer) const;
 	void leerPuntuacion(const string& nomFitxer);
-
 	Partida m_partida;
 	std::list<Puntos> m_puntuaciones;
 };

@@ -22,27 +22,24 @@ bool Tauler::HiHaColisions(const Figura& figura) const
 {
 	if (figura.getMatriu() == nullptr)
 		return false;
-	
 	int x = figura.getPosicioUpperLeft().x;
 	int y = figura.getPosicioUpperLeft().y;
 
 	for (int i = 0; i < figura.getNCostats(); i++)
 	{
-	   
 		for (int j = 0; j < figura.getNCostats(); j++)
 		{
-		   
 		    if (figura.getMatriu()[i][j] != COLOR_NEGRE)
 		    {
-			if (x + j >= MAX_COL || y + i >= MAX_FILA || y + i < 0 || x + j < 0)
-			{
-			    return true;
-			}
-			if (figura.getMatriu()[i][j] != COLOR_NEGRE
-			    && m_tauler[y + i][x + j] != COLOR_NEGRE)
-			{
-			    return true;
-			}
+				if (x + j >= MAX_COL || y + i >= MAX_FILA || y + i < 0 || x + j < 0)
+				{
+					return true; //Si sobrepasa de las paredes, es colision tmb
+				}
+				if (figura.getMatriu()[i][j] != COLOR_NEGRE
+				    && m_tauler[y + i][x + j] != COLOR_NEGRE) //Si no es color negro quirer decir q hay algo
+				{
+				    return true;
+				}
 		    }
 		}
 	}
@@ -61,7 +58,7 @@ void Tauler::FixarFigura(const Figura& figura)
 	for (int i = 0; i < figura.getNCostats(); i++)
 		for (int j = 0; j < figura.getNCostats(); j++)
 		{
-			if (figura.getMatriu()[i][j] != COLOR_NEGRE) // REVIEW: No usar NO_COLOR
+			if (figura.getMatriu()[i][j] != COLOR_NEGRE) //Pone la figura en el tablero
 			{
 				if (x + j < MAX_COL && i + y < MAX_FILA &&
 					x + j >= 0 && i + y >= 0)

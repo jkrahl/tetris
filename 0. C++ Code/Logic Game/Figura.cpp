@@ -18,7 +18,12 @@ ostream& operator<<(ostream& os, const Figura& f)
 	return os;
 }
 
-istream& operator>>(istream& in, Figura& f)
+/*
+Lee la figura, el 4444 es un numero random 
+para assegurar que se lee (tipus no puede ser 
+4444 nunca a no ser que lea mal in >> tipus)
+*/
+istream& operator>>(istream& in, Figura& f) 
 {
 	int tipus = 4444;
 	int y, x, nGirs;
@@ -28,15 +33,13 @@ istream& operator>>(istream& in, Figura& f)
 	if (tipus != 4444)
 	{
 		f = Figura((TipusFigura)tipus, { x, y });
-
 		for (int i = 0; i < nGirs; i++)
 			f.girar(GIR_HORARI);
 	}
-	
-
 	return in;
 }
 
+//copia shallow copy
 Figura::Figura(const Figura& other)
 	:m_matriu(nullptr)
 {
@@ -58,6 +61,7 @@ Figura::~Figura()
 	allibera();
 }
 
+//Para liberar la figura
 void Figura::allibera()
 {
 	if (m_matriu != nullptr)
@@ -69,7 +73,8 @@ void Figura::allibera()
 	m_matriu = nullptr;
 }
 
-void Figura::dibuixa() const
+
+void Figura::dibuixa() const  //muestra la figura al tablero
 {
 	for (size_t i = 0; i < getNCostats(); i++)
 	{
@@ -87,14 +92,15 @@ void Figura::dibuixa() const
 	}
 }
 
-void Figura::dibuixaBordes() const
+//Dibuja la sombra de la figura actual, se ha creado figura nueva (gris -> simula la sombra)
+void Figura::dibuixaFantasma() const
 {
 	for (size_t i = 0; i < getNCostats(); i++)
 	{
 		for (size_t j = 0; j < getNCostats(); j++)
 		{
 			ColorFigura color = getMatriu()[i][j];
-			if (color != COLOR_NEGRE)
+			if (color != COLOR_NEGRE) //Mientras que no sea negra == imprime la figura con la parte de colores
 			{
 				auto pos = getPosicioUpperLeft();
 				GraphicManager::getInstance()->drawSprite((GRAFIC_QUADRAT_GRIS),
@@ -105,8 +111,11 @@ void Figura::dibuixaBordes() const
 	}
 }
 
-
-void Figura::girar(const DireccioGir& direccio)
+/*
+Dependiendo de si es horario(true) o antihorario(false)
+girara de una manera u otra, en invertir ya tiene en cuenta eso
+*/
+void Figura::girar(const DireccioGir& direccio) 
 {
 	transposarMatriuFigura();
 	if (direccio == GIR_HORARI)
@@ -115,6 +124,7 @@ void Figura::girar(const DireccioGir& direccio)
 		invertir(false, true);
 }
 
+//Deep copy de la figura
 Figura Figura::operator=(const Figura& other)
 {
 	if (this != &other)
@@ -135,6 +145,10 @@ Figura Figura::operator=(const Figura& other)
 	return *this;
 }
 
+
+//(1)(2), esos dos metodos juntos hacen el trabajo de girar la figura de modo horario/antihorario
+
+// (1)
 void Figura::transposarMatriuFigura()
 {
 	ColorFigura matriuAux[N_FILES_MAX][N_COLUMNES_MAX];
@@ -146,7 +160,7 @@ void Figura::transposarMatriuFigura()
 		for (int j = 0; j < m_nCostats; j++)
 			m_matriu[i][j] = matriuAux[i][j];
 }
-
+//(2)
 void Figura::invertir(const bool& columnes, const bool& files)
 {
 	ColorFigura matriuAux[N_FILES_MAX][N_COLUMNES_MAX];
@@ -237,7 +251,7 @@ ColorFigura** Figura::creaMatriu(int nFiles, int nColumnes)
 	return matriu;
 }
 
-int nCostatsSegonsTipus(const TipusFigura& tipus)
+int nCostatsSegonsTipus(const TipusFigura& tipus) //Devuelve los nLados de la figrua
 {
 	int nCostats = -1;
 	switch (tipus)
@@ -261,5 +275,3 @@ int nCostatsSegonsTipus(const TipusFigura& tipus)
 
 	return nCostats;
 }
-
-
