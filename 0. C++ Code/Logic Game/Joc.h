@@ -48,6 +48,7 @@ public:
 	* La figura s’ha de mostrar com si estigués col·locada al tauler a la seva posició actual.
 	*/
 	void escriuTauler(const string& nomFitxer);
+
 private:
 	Tauler m_tauler;
 	Figura m_figura_actual;

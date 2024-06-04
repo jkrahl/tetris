@@ -227,6 +227,13 @@ void Partida::actualitza(double deltaTime)
    
     string msg = "Puntos: " + to_string(m_puntuacio) + "          Nivel: " + to_string(m_nivell);
     GraphicManager::getInstance()->drawFont(FONT_WHITE_30, POS_X_TAULER, POS_Y_TAULER - 60, 1.0, msg);
+
+    if (m_gameOver)
+    {
+        string msg = "GAME OVER!";
+        GraphicManager::getInstance()->drawFont(FONT_RED_30, POS_X_TAULER - 10, POS_Y_TAULER + 80, 2.0, msg);
+  
+    }
      
 
 }

@@ -10,9 +10,9 @@ typedef enum
 {
     TECLA_ESQUERRA,
     TECLA_DRETA,
-    TECLA_AMUNT,    
-    TECLA_ABAIX, 
-    TECLA_ESPAI, 
+    TECLA_AMUNT,
+    TECLA_ABAIX,
+    TECLA_ESPAI,
     TECLA_ESCAPE,
     NO_TECLA
 } TipusTecla;

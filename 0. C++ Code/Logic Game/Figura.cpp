@@ -149,7 +149,7 @@ void Figura::transposarMatriuFigura()
 void Figura::invertir(const bool& columnes, const bool& files)
 {
 	ColorFigura matriuAux[N_FILES_MAX][N_COLUMNES_MAX];
-	if (columnes)
+	if (columnes)	
 		for (int i = 0; i < m_nCostats; i++)
 			for (int j = 0; j < m_nCostats; j++)
 				matriuAux[i][j] = m_matriu[i][m_nCostats - 1 - j];

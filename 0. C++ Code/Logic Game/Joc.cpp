@@ -5,7 +5,7 @@
 
 const int MAX_FILES = N_FILES_TAULER;
 const int MAX_COLUMNES = N_COL_TAULER;
-	
+
 void Joc::inicialitza(const string& nomFitxer)
 {
 	*this = Joc();

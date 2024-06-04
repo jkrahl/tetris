@@ -27,7 +27,6 @@ void Tetris::jugaPartida(Screen& pantalla)
             cin >> jugador;
             insertaPuntuacionOrdenada(jugador, puntos);
 
-
             break;
         }
         case 2:
@@ -39,7 +38,6 @@ void Tetris::jugaPartida(Screen& pantalla)
 
             cin >> jugador;
             insertaPuntuacionOrdenada(jugador, puntos);
-
             break;
         }
         case 3:
@@ -52,18 +50,20 @@ void Tetris::jugaPartida(Screen& pantalla)
             break;
         }
     } while (opcio != 4);   
-
     guardaPuntuacion("puntuacion.txt"); //Al final para que se guarde una vez
+   
 }
 
 void Tetris::mostraPuntuacio() const 
 {
     list<Puntos>::const_iterator iter = m_puntuaciones.begin();
     cout << "------PUNTUACIONES------" << endl;
-    while (iter != m_puntuaciones.end())
+    int i = 0;
+    while (iter != m_puntuaciones.end() && i <= 10) //Mostrar solo 10 puntos
     {
-        cout << "Jugador: " << iter->jugador << "     Puntuacion: " << iter->puntos << endl;
+        cout << i+1 <<  "-   Jugador: " << iter->jugador << "     Puntuacion: " << iter->puntos << endl;
         iter++;
+        i++;
     }
 
 }
